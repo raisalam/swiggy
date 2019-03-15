@@ -38,7 +38,6 @@ public class OrderController {
   public ResponseEntity<GetOrderResponse> getOrder(@PathVariable Long orderId) {
 
     Order order = orderRepository.findById(orderId).get();
-
     if (order == null) {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     } else {
