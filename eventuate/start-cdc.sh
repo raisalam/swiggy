@@ -1,0 +1,14 @@
+export SPRING_DATASOURCE_URL=jdbc:mysql://localhost/eventuate
+export SPRING_DATASOURCE_USERNAME=root
+export SPRING_DATASOURCE_PASSWORD=root
+export SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.jdbc.Driver
+export EVENTUATELOCAL_KAFKA_BOOTSTRAP_SERVERS=localhost:9092
+export EVENTUATELOCAL_ZOOKEEPER_CONNECTION_STRING=localhost:2181
+export EVENTUATELOCAL_CDC_DB_USER_NAME=root
+export EVENTUATELOCAL_CDC_DB_PASSWORD=root
+export EVENTUATELOCAL_CDC_LEADERSHIP_LOCK_PATH=/eventuate/cdc/leader/eventuatelocal
+export EVENTUATELOCAL_CDC_BINLOG_CLIENT_ID=1
+export EVENTUATELOCAL_CDC_MY_SQL_BIN_LOG_CLIENT_NAME=ClientEventuateLocal
+export EVENTUATELOCAL_CDC_DB_HISTORY_TOPIC_NAME=db.history.eventuate.local
+
+java -jar eventuate-local-java-cdc-service-0.22.1.RELEASE.jar
