@@ -2,7 +2,10 @@ package com.rais.swiggy.order.domain;
 
 
 
+import com.rais.swiggy.common.events.OrderCreatedEvent;
+import com.rais.swiggy.common.events.OrderEvent;
 import io.eventuate.tram.events.ResultWithEvents;
+import io.eventuate.tram.events.aggregates.ResultWithDomainEvents;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -13,6 +16,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Collections;
+import java.util.List;
+
+import static java.util.Collections.singletonList;
 
 @Entity
 @Table(name="orders")
@@ -36,8 +42,11 @@ public class Order {
     this.state = OrderState.PENDING;
   }
 
-  public static ResultWithEvents<Order> createOrder(OrderDetails orderDetails) {
-    return new ResultWithEvents<Order>(new Order(orderDetails), Collections.emptyList());
+  public static ResultWithDomainEvents<Order,OrderEvent> createOrder(OrderDetails orderDetails) {
+    Order order = new Order(orderDetails);
+    com.rais.swiggy.common.dtos.OrderDetails orderDetail  = new com.rais.swiggy.common.dtos.OrderDetails(orderDetails.getCustomerId(), orderDetails.getOrderTotal());
+    List<OrderEvent> events = singletonList(new OrderCreatedEvent(orderDetail));
+    return new ResultWithDomainEvents<>(order, events);
   }
 
   public Long getId() {

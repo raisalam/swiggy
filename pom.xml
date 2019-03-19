@@ -8,6 +8,7 @@
         <module>customer</module>
         <module>kitchen</module>
         <module>order</module>
+        <module>view</module>
 
     </modules>
     <parent>

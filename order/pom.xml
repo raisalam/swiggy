@@ -42,6 +42,13 @@
             <artifactId>eventuate-tram-sagas-simple-dsl</artifactId>
             <version>${eventuateTramSagasVersion}</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.eventuate.tram.core</groupId>
+            <artifactId>eventuate-tram-aggregate-domain-events</artifactId>
+            <version>${eventuateTramVersion}</version>
+        </dependency>
+
     </dependencies>
 
 
