@@ -2,6 +2,7 @@ package com.rais.swiggy.order;
 
 import com.rais.swiggy.order.saga.CreateOrderSaga;
 import com.rais.swiggy.order.saga.CreateOrderSagaData;
+import com.rais.swiggy.order.sagaparticipants.ConsumerServiceProxy;
 import com.rais.swiggy.order.service.OrderCommandHandler;
 import com.rais.swiggy.order.service.OrderService;
 import io.eventuate.tram.commands.consumer.CommandDispatcher;
@@ -32,13 +33,18 @@ public class OrderConfiguration {
 
 
   @Bean
-  public CreateOrderSaga createOrderSaga() {
-    return new CreateOrderSaga();
+  public CreateOrderSaga createOrderSaga(ConsumerServiceProxy consumerServiceProxy) {
+    return new CreateOrderSaga(consumerServiceProxy);
   }
 
   @Bean
   public OrderCommandHandler orderCommandHandler() {
     return new OrderCommandHandler();
+  }
+
+  @Bean
+  public ConsumerServiceProxy consumerServiceProxy() {
+    return new ConsumerServiceProxy();
   }
 
   @Bean

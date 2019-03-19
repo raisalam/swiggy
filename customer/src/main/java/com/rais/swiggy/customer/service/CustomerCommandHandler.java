@@ -1,6 +1,7 @@
 package com.rais.swiggy.customer.service;
 
 import com.rais.swiggy.common.command.ReserveCreditCommand;
+import com.rais.swiggy.common.command.ValidateOrderByConsumer;
 import com.rais.swiggy.common.replies.CustomerCreditReservationFailed;
 import com.rais.swiggy.common.replies.CustomerCreditReserved;
 import com.rais.swiggy.customer.domain.Customer;
@@ -23,6 +24,7 @@ public class CustomerCommandHandler {
     return SagaCommandHandlersBuilder
             .fromChannel("customerService")
             .onMessage(ReserveCreditCommand.class, this::reserveCredit)
+            .onMessage(ValidateOrderByConsumer.class, this::validateOrderForConsumer)
             .build();
   }
 
@@ -39,6 +41,21 @@ public class CustomerCommandHandler {
       return withFailure(new CustomerCreditReservationFailed());
     }
   }
+
+  public Message validateOrderForConsumer(CommandMessage<ValidateOrderByConsumer> cm) {
+    System.out.println("CustomerCommandHandler :: ValidateOrderByConsumer()");
+    ValidateOrderByConsumer cmd = cm.getCommand();
+    long customerId = cmd.getConsumerId();
+    try{
+    Customer customer = customerRepository.findById(customerId).get();
+
+      return withSuccess(new CustomerCreditReserved());
+    } catch (Exception e) {
+      System.out.println("CustomerCommandHandler :: validateOrderForConsumer - Consumer not found  = "+e.getMessage());
+      return withFailure(new CustomerCreditReservationFailed());
+    }
+  }
+
 
   // withLock(Customer.class, customerId).
   // TODO @Validate to trigger validation and error reply

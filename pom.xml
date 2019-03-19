@@ -6,7 +6,9 @@
     <modules>
         <module>common</module>
         <module>customer</module>
+        <module>kitchen</module>
         <module>order</module>
+
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
