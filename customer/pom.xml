@@ -24,6 +24,12 @@
             <version>${eventuateTramVersion}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.rais.swiggy</groupId>
+            <artifactId>common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
 
         <dependency>
             <groupId>io.eventuate.tram.sagas</groupId>
