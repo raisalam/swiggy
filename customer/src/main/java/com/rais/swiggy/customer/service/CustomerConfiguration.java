@@ -13,11 +13,13 @@ import io.eventuate.tram.events.publisher.DomainEventPublisher;
 import io.eventuate.tram.sagas.participant.SagaCommandDispatcher;
 import io.eventuate.tram.sagas.participant.SagaLockManager;
 import io.eventuate.tram.sagas.participant.SagaParticipantConfiguration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @Import(SagaParticipantConfiguration.class)
 @EnableJpaRepositories
 @EnableAutoConfiguration
+@EnableTransactionManagement
 public class CustomerConfiguration {
 
   @Bean
@@ -29,8 +31,6 @@ public class CustomerConfiguration {
   public CustomerCommandHandler customerCommandHandler() {
     return new CustomerCommandHandler();
   }
-
-  // TODO Exception handler for CustomerCreditLimitExceededException
 
   @Bean
   public CommandDispatcher consumerCommandDispatcher(CustomerCommandHandler target,

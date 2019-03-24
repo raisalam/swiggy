@@ -21,6 +21,15 @@
             <artifactId>eventuate-tram-jdbc-kafka</artifactId>
             <version>${eventuateTramVersion}</version>
         </dependency>
+        <dependency>
+            <groupId>io.eventuate.client.java</groupId>
+            <artifactId>eventuate-client-java-spring</artifactId>
+            <version>0.20.1.RELEASE</version>
+        </dependency>
+
+
+
+
 
     </dependencies>
 
