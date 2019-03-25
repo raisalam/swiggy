@@ -1,14 +1,12 @@
 package com.rais.swiggy.view.consumers;
 
 
-import io.eventuate.javaclient.spring.EnableEventHandlers;
 import io.eventuate.tram.events.subscriber.DomainEventDispatcher;
 import io.eventuate.tram.messaging.consumer.MessageConsumer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableEventHandlers
 public class OrderHistoryServiceMessagingConfiguration {
 
   @Bean

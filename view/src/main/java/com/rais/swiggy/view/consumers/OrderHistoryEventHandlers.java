@@ -1,5 +1,6 @@
 package com.rais.swiggy.view.consumers;
 
+import com.rais.swiggy.common.events.OrderRejectedEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.rais.swiggy.common.events.OrderCreatedEvent;
@@ -18,7 +19,7 @@ public class OrderHistoryEventHandlers {
 	public DomainEventHandlers domainEventHandlers() {
 		return DomainEventHandlersBuilder.forAggregateType("com.rais.swiggy.order.domain.Order")
 				.onEvent(OrderCreatedEvent.class, this::handleOrderCreated)
-//            .onEvent(DeliveryPickedUp.class, this::handleDeliveryPickedUp)
+				.onEvent(OrderRejectedEvent.class, this::handleOrderRejected)
 				.build();
 	}
 
@@ -27,6 +28,12 @@ public class OrderHistoryEventHandlers {
 		OrderDetails orderDetail = new OrderDetails(dee.getEvent().getOrderDetails().getCustomerId(),
 				dee.getEvent().getOrderDetails().getOrderTotal());
 		viewService.saveOrder(orderDetail);
+
+	}
+
+	public void handleOrderRejected(DomainEventEnvelope<OrderRejectedEvent> dee) {
+		System.out.println("handleOrderRejected amount {}" + dee.getEvent().getOrderTotal().getAmount());
+
 
 	}
 }
